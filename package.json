@@ -17,6 +17,7 @@
     "test:cov": "vitest --coverage"
   },
   "dependencies": {
+    "@coaktion/client-core": "^1.2.0",
     "@supabase/auth-ui-react": "^0.3.5",
     "@supabase/supabase-js": "^2.21.0",
     "react": "^18.2.0",
