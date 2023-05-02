@@ -41,6 +41,6 @@ export interface ICompanyModel {
   getById(id: string): Promise<ICompany | null>;
   getByName(name: string): Promise<ICompany[]>;
 
-  create(input: ICompanyInput): Promise<string>; // id
+  create(input: ICompanyInput): Promise<Omit<ICompany, 'evaluations'>>;
   addEvaluation(companyId: string, input: IEvaluationInput): Promise<void>;
 }

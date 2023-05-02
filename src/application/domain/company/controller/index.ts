@@ -40,6 +40,9 @@ export abstract class CompanyControllerAbs {
     presenter?: null | IPresenter<ICompany[], T>
   ): Promise<T>;
 
-  abstract create(dto: InputCreateCompanyDto): Promise<string>; // id
+  abstract create<T = Omit<ICompany, 'evaluations'>>(
+    dto: InputCreateCompanyDto,
+    presenter?: null | IPresenter<Omit<ICompany, 'evaluations'>, T>
+  ): Promise<T>; // id
   abstract addEvaluation(dto: InputAddEvaluationDto): Promise<void>;
 }

@@ -9,14 +9,16 @@ import type { ICompany } from '@company/model';
 import type { IPresenter } from '@shared/controller';
 
 export class CompanyController extends CompanyControllerAbs {
-  async getAll<T>(presenter: IPresenter<ICompany[], T> | null): Promise<T> {
+  async getAll<T>(
+    presenter: IPresenter<ICompany[], T> | null = null
+  ): Promise<T> {
     const result = await this.model.getAll();
     return presenter ? presenter(result) : (result as T);
   }
 
   async getById<T>(
     { id }: InputGetCompanyByIdDto,
-    presenter: IPresenter<ICompany | null, T> | null
+    presenter: IPresenter<ICompany | null, T> | null = null
   ): Promise<T> {
     const result = await this.model.getById(id);
     return presenter ? presenter(result) : (result as T);
@@ -24,14 +26,18 @@ export class CompanyController extends CompanyControllerAbs {
 
   async getByName<T>(
     { name }: InputGetCompanyByNameDto,
-    presenter: IPresenter<ICompany[], T> | null
+    presenter: IPresenter<ICompany[], T> | null = null
   ): Promise<T> {
     const result = await this.model.getByName(name);
     return presenter ? presenter(result) : (result as T);
   }
 
-  async create(dto: InputCreateCompanyDto): Promise<string> {
-    return await this.model.create(dto);
+  async create<T = Omit<ICompany, 'evaluations'>>(
+    dto: InputCreateCompanyDto,
+    presenter: IPresenter<Omit<ICompany, 'evaluations'>, T> | null = null
+  ): Promise<T> {
+    const result = await this.model.create(dto);
+    return presenter ? presenter(result) : (result as T);
   }
 
   async addEvaluation(dto: InputAddEvaluationDto): Promise<void> {

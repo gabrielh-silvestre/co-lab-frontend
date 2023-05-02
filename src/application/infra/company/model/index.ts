@@ -15,7 +15,7 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
       endpoints: {
         search: '/companies/search',
         fetch: '/companies/{id}',
-        create: '/companies',
+        create: '/companies/create',
         update: '/companies/{id}'
       }
     });
@@ -35,7 +35,7 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
     return this.search({ name }).then((res) => res.data);
   }
 
-  async create(input: ICompanyInput): Promise<string> {
+  async create(input: ICompanyInput): Promise<Omit<ICompany, 'evaluations'>> {
     return super.create(input).then((res) => res.data);
   }
 
