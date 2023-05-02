@@ -1,4 +1,4 @@
-import { CompanyControllerAbs } from '@domain/company/controller';
+import { CompanyControllerAbs } from '@company/controller';
 
 import { CompanyController } from '../controller';
 import { CompanyModel } from '../model';

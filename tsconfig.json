@@ -22,8 +22,22 @@
 
     "paths": {
       "@/*": ["src/*"],
-      "@domain/*": ["src/application/domain/*"],
-      "@infra/*": ["src/application/infra/*"]
+      "@worker/*": [
+        "src/application/domain/worker/*",
+        "src/application/infra/worker/*"
+      ],
+      "@company/*": [
+        "src/application/domain/company/*",
+        "src/application/infra/company/*"
+      ],
+      "@auth/*": [
+        "src/application/domain/auth/*",
+        "src/application/infra/auth/*"
+      ],
+      "@shared/*": [
+        "src/application/domain/shared/*",
+        "src/application/infra/shared/*"
+      ]
     }
   },
   "include": ["src", "tests"],

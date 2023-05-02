@@ -3,9 +3,9 @@ import type {
   ICompanyInput,
   ICompanyModel,
   IEvaluationInput
-} from '@domain/company/model';
+} from '@company/model';
 
-import { CustomAxiosClient } from '../../shared/client-core/CustomAxios.client-core';
+import { CustomAxiosClient } from '@shared/client-core/CustomAxios.client-core';
 
 export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
   constructor(baseURL: string) {

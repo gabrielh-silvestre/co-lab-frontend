@@ -4,9 +4,9 @@ import {
   InputCreateCompanyDto,
   InputGetCompanyByIdDto,
   InputGetCompanyByNameDto
-} from '@domain/company/controller';
-import type { ICompany } from '@domain/company/model';
-import type { IPresenter } from '@domain/shared/controller';
+} from '@company/controller';
+import type { ICompany } from '@company/model';
+import type { IPresenter } from '@shared/controller';
 
 export class CompanyController extends CompanyControllerAbs {
   async getAll<T>(presenter: IPresenter<ICompany[], T> | null): Promise<T> {

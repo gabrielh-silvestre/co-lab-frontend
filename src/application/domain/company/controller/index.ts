@@ -1,4 +1,4 @@
-import type { IPresenter } from '@domain/shared/controller';
+import type { IPresenter } from '@shared/controller';
 
 import type { ICompany, ICompanyModel } from '../model';
 
