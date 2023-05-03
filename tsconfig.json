@@ -21,22 +21,15 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@worker/*": [
-        "src/application/domain/worker/*",
-        "src/application/infra/worker/*"
-      ],
-      "@company/*": [
-        "src/application/domain/company/*",
-        "src/application/infra/company/*"
-      ],
-      "@auth/*": [
-        "src/application/domain/auth/*",
-        "src/application/infra/auth/*"
-      ],
-      "@shared/*": [
-        "src/application/domain/shared/*",
-        "src/application/infra/shared/*"
-      ]
+      "@worker/domain/*": ["./src/application/domain/worker/*"],
+      "@worker/infra/*": ["./src/application/infra/worker/*"],
+      "@company/domain/*": ["./src/application/domain/company/*"],
+      "@company/infra/*": ["./src/application/infra/company/*"],
+      "@auth/domain/*": ["./src/application/domain/auth/*"],
+      "@auth/infra/*": ["./src/application/infra/auth/*"],
+      "@shared/domain/*": ["./src/application/domain/shared/*"],
+      "@shared/infra/*": ["./src/application/infra/shared/*"],
+      "@mocks/*": ["./tests/mock/*"]
     }
   },
   "include": ["src", "tests"],

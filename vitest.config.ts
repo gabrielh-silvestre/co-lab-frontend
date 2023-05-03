@@ -1,8 +1,10 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
+import tsConfigPaths from 'vite-tsconfig-paths';
 import { configDefaults } from 'vitest/dist/config';
 
 export default defineConfig({
+  plugins: [tsConfigPaths()],
   test: {
     globals: true,
     environment: 'happy-dom',
