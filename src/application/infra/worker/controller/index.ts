@@ -1,6 +1,6 @@
-import type { IPresenter } from '@shared/controller';
-import type { IWorker } from '@worker/model';
-import { InputGetWorkerByIdDto, WorkerControllerAbs } from '@worker/controller';
+import type { IPresenter } from '@shared/domain/controller';
+import type { IWorker } from '@worker/domain/model';
+import { InputGetWorkerByIdDto, WorkerControllerAbs } from '@worker/domain/controller';
 
 export class WorkerController extends WorkerControllerAbs {
   async getById<T = IWorker>(
@@ -8,8 +8,6 @@ export class WorkerController extends WorkerControllerAbs {
     presenter: null | IPresenter<IWorker, T> = null
   ): Promise<T> {
     const result = await this.model.getById(id);
-    if (!result) throw new Error('Worker not found');
-
     return presenter ? presenter(result) : (result as T);
   }
 }

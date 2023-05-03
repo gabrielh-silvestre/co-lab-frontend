@@ -1,20 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AuthApiKey, AxiosClient, DataOptions } from '@coaktion/client-core';
-import type { ClientOptionsAxios } from '@coaktion/client-core/dist/types';
+import { AxiosClient, DataOptions } from '@coaktion/client-core';
 import type { AxiosResponse } from 'axios';
 
 export class CustomAxiosClient extends AxiosClient {
-  constructor(clientOptions: Omit<ClientOptionsAxios, 'authProvider'>) {
-    super({
-      ...clientOptions,
-      authProvider: new AuthApiKey({
-        headerKey: 'apiKey',
-        apiKey: '$2b$10$68Qj.iAg.XsJ8ek4ALS1WuTHjzyAWHj.YFwwzW0eKASNg7PVtMgQq'
-      }),
-      forceAuth: true
-    });
-  }
-
   private static convertPathParams(path: string, params: object): string {
     return Object.entries(params).reduce(
       (acc, [key, value]) => acc.replace(`{${key}}`, value),
@@ -29,7 +17,7 @@ export class CustomAxiosClient extends AxiosClient {
     headers?: object | undefined
   ): Promise<AxiosResponse<T, unknown>> {
     if (this.clientOptions.forceAuth || this.retryAuth) {
-      await super.authentication();
+      await this.authentication();
     }
 
     return this.client.request({
@@ -38,7 +26,7 @@ export class CustomAxiosClient extends AxiosClient {
       data: dataOptions?.data,
       params: {
         ...dataOptions?.params,
-        ...this.auth
+        apiKey: '$2b$10$68Qj.iAg.XsJ8ek4ALS1WuTHjzyAWHj.YFwwzW0eKASNg7PVtMgQq'
       },
       headers
     });

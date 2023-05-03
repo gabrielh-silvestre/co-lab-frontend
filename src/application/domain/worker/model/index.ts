@@ -9,5 +9,5 @@ export interface IWorker {
 }
 
 export interface IWorkerModel {
-  getById(id: number): Promise<IWorker | null>;
+  getById(id: string): Promise<IWorker>;
 }

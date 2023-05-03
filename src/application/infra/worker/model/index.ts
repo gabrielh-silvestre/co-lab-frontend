@@ -1,5 +1,5 @@
-import { CustomAxiosClient } from '@shared/client-core/CustomAxios.client-core';
-import type { IWorker, IWorkerModel } from '@worker/model';
+import { CustomAxiosClient } from '@shared/infra/client-core/CustomAxios.client-core';
+import type { IWorker, IWorkerModel } from '@worker/domain/model';
 
 export class WorkerModel extends CustomAxiosClient implements IWorkerModel {
   constructor(baseURL: string) {
@@ -10,7 +10,7 @@ export class WorkerModel extends CustomAxiosClient implements IWorkerModel {
     });
   }
 
-  async getById(id: number): Promise<IWorker | null> {
-    return this.fetch(`${id}`).then((res) => res.data);
+  async getById(id: string): Promise<IWorker> {
+    return this.fetch(id).then((res) => res.data);
   }
 }

@@ -1,4 +1,4 @@
-import { WorkerControllerAbs } from '@worker/controller';
+import { WorkerControllerAbs } from '@worker/domain/controller';
 
 import { WorkerController } from '../controller';
 import { WorkerModel } from '../model';

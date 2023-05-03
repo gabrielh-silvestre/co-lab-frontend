@@ -1,4 +1,4 @@
-import type { IAuthModel } from '@domain/auth/model';
+import type { IAuthModel } from '@auth/domain/model';
 import { Session, SupabaseClient, User } from '@supabase/supabase-js';
 
 export type AuthOutput = {

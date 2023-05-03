@@ -3,9 +3,8 @@ import type {
   ICompanyInput,
   ICompanyModel,
   IEvaluationInput
-} from '@company/model';
-
-import { CustomAxiosClient } from '@shared/client-core/CustomAxios.client-core';
+} from '@company/domain/model';
+import { CustomAxiosClient } from '@shared/infra/client-core/CustomAxios.client-core';
 
 export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
   constructor(baseURL: string) {
@@ -27,7 +26,7 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
       .then((res) => res.data);
   }
 
-  async getById(id: string): Promise<ICompany | null> {
+  async getById(id: string): Promise<ICompany> {
     return this.fetch(id).then((res) => res.data);
   }
 

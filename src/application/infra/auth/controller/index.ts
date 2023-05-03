@@ -1,5 +1,5 @@
-import type { IAuthModel } from '@/application/domain/auth/model';
-import type { IPresenter } from '@/application/domain/shared/controller';
+import type { IAuthModel } from '@auth/domain/model';
+import type { IPresenter } from '@shared/domain/controller';
 
 import type { AuthOutput } from '../model';
 

@@ -38,7 +38,7 @@ export interface ICompanyInput {
 
 export interface ICompanyModel {
   getAll(): Promise<ICompany[]>;
-  getById(id: string): Promise<ICompany | null>;
+  getById(id: string): Promise<ICompany>;
   getByName(name: string): Promise<ICompany[]>;
 
   create(input: ICompanyInput): Promise<Omit<ICompany, 'evaluations'>>;
