@@ -62,7 +62,6 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
       method: 'POST',
       url: '/create',
       data: {},
-      params: undefined,
       headers: API_KEY_HEADER
     });
   });
@@ -77,7 +76,6 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
       method: 'PUT',
       url: '/update/1',
       data: {},
-      params: undefined,
       headers: API_KEY_HEADER
     });
   });
@@ -91,7 +89,6 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
     expect(spyRequest).toHaveBeenCalledWith({
       method: 'DELETE',
       url: '/delete/1',
-      params: undefined,
       headers: API_KEY_HEADER
     });
   });
@@ -105,7 +102,6 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
     expect(spyRequest).toHaveBeenCalledWith({
       method: 'GET',
       url: '/fetch/1',
-      params: undefined,
       headers: API_KEY_HEADER
     });
   });
