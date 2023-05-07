@@ -1,4 +1,5 @@
 import type { IPresenter } from '@shared/domain/controller';
+
 import type { IWorker, IWorkerModel } from '../model';
 
 export interface InputGetWorkerByIdDto {

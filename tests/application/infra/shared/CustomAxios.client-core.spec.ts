@@ -1,3 +1,4 @@
+import { API_KEY_HEADER } from '@mocks/shared';
 import { CustomAxiosClient } from '@shared/infra/client-core/CustomAxios.client-core';
 import MockAdapter from 'axios-mock-adapter';
 import {
@@ -61,8 +62,7 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
       method: 'POST',
       url: '/create',
       data: {},
-      params: { apiKey: expect.any(String) },
-      headers: undefined
+      headers: API_KEY_HEADER
     });
   });
 
@@ -76,8 +76,7 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
       method: 'PUT',
       url: '/update/1',
       data: {},
-      params: { apiKey: expect.any(String) },
-      headers: undefined
+      headers: API_KEY_HEADER
     });
   });
 
@@ -90,8 +89,7 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
     expect(spyRequest).toHaveBeenCalledWith({
       method: 'DELETE',
       url: '/delete/1',
-      params: { apiKey: expect.any(String) },
-      headers: undefined
+      headers: API_KEY_HEADER
     });
   });
 
@@ -104,8 +102,7 @@ describe('[Unit] Tests for CustomAxiosClient', () => {
     expect(spyRequest).toHaveBeenCalledWith({
       method: 'GET',
       url: '/fetch/1',
-      params: { apiKey: expect.any(String) },
-      headers: undefined
+      headers: API_KEY_HEADER
     });
   });
 });

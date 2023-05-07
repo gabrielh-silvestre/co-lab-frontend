@@ -27,7 +27,7 @@ export class CustomAxiosClient extends AxiosClient {
       params: dataOptions?.params,
       headers: {
         ...headers,
-        'x-api-key': import.meta.env.VITE_API_KEY,
+        'x-api-key': import.meta.env.VITE_API_KEY
       }
     });
   }
