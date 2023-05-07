@@ -24,11 +24,11 @@ export class CustomAxiosClient extends AxiosClient {
       method: methodName,
       url: endpoint,
       data: dataOptions?.data,
-      params: {
-        ...dataOptions?.params,
-        apiKey: '$2b$10$68Qj.iAg.XsJ8ek4ALS1WuTHjzyAWHj.YFwwzW0eKASNg7PVtMgQq'
-      },
-      headers
+      params: dataOptions?.params,
+      headers: {
+        ...headers,
+        'x-api-key': import.meta.env.VITE_API_KEY,
+      }
     });
   }
 
