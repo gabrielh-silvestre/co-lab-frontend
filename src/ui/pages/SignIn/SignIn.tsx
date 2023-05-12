@@ -1,21 +1,20 @@
 import { AuthController } from '@auth/infra/controller';
 import {
-  AspectRatio,
   Box,
   Button,
   Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input,
-  Link
+  Input
 } from '@chakra-ui/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { User } from '@supabase/supabase-js';
 import * as Joi from 'joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/logo-signin.svg';
 
 export type SignInProps = {
   authController: AuthController;
@@ -52,10 +51,10 @@ export function SignIn({ authController }: SignInProps) {
   };
 
   return (
-    <Container className="h-screen flex flex-col justify-center content-center bg-backgorund">
-      <AspectRatio>
-        <img src={logo} alt="logo" />
-      </AspectRatio>
+    <Container className="h-screen flex flex-col justify-center content-center bg-primary">
+      <Box className="sm:max-w-sm mb-8">
+        <img className="w-full" src={logo} alt="logo" />
+      </Box>
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +64,8 @@ export function SignIn({ authController }: SignInProps) {
                 id="email"
                 placeholder="Email"
                 variant="filled"
-                _focus={{ color: 'secondary' }}
+                rounded="full"
+                _focus={{ borderColor: 'backgorund' }}
                 {...register('email', { required: true })}
               />
 
@@ -77,10 +77,11 @@ export function SignIn({ authController }: SignInProps) {
             <FormLabel htmlFor="password">
               <Input
                 id="password"
-                placeholder="Password"
+                placeholder="Senha"
                 type="password"
                 variant="filled"
-                _focus={{ color: 'secondary' }}
+                rounded="full"
+                _focus={{ borderColor: 'backgorund' }}
                 {...register('password', { required: true })}
               />
 
@@ -93,10 +94,12 @@ export function SignIn({ authController }: SignInProps) {
               <Button
                 type="submit"
                 isLoading={isSubmitting}
-                bgColor="primary"
-                color="detail"
+                bgColor="background"
+                color="primary"
                 spinnerPlacement="start"
                 fontWeight="bold"
+                rounded="full"
+                px="12"
               >
                 Entrar
               </Button>
@@ -105,9 +108,11 @@ export function SignIn({ authController }: SignInProps) {
         </form>
       </div>
 
-      <Box className="mt-8 text-secondary">
-        <p>Don't have an account?</p>
-        <Link color="teal.100">Sign up</Link>
+      <Box className="flex justify-center mt-8 text-backgorund">
+        <p>Nova por aqui?</p>
+        <Link className="ml-2 underline" to="/sign-up">
+          Cadastre-se
+        </Link>
       </Box>
     </Container>
   );
