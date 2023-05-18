@@ -9,14 +9,14 @@ import type { ICompany } from '@company/domain/model';
 import type { IPresenter } from '@shared/domain/controller';
 
 export class CompanyController extends CompanyControllerAbs {
-  async getAll<T>(
+  async getAll<T = ICompany[]>(
     presenter: IPresenter<ICompany[], T> | null = null
   ): Promise<T> {
     const result = await this.model.getAll();
     return presenter ? presenter(result) : (result as T);
   }
 
-  async getById<T>(
+  async getById<T = ICompany | null>(
     { id }: InputGetCompanyByIdDto,
     presenter: IPresenter<ICompany | null, T> | null = null
   ): Promise<T> {
@@ -24,7 +24,7 @@ export class CompanyController extends CompanyControllerAbs {
     return presenter ? presenter(result) : (result as T);
   }
 
-  async getByName<T>(
+  async getByName<T = ICompany[]>(
     { name }: InputGetCompanyByNameDto,
     presenter: IPresenter<ICompany[], T> | null = null
   ): Promise<T> {
