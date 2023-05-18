@@ -1,3 +1,4 @@
+import logo from '@assets/logo-signin.svg';
 import { AuthController } from '@auth/infra/controller';
 import {
   Box,
@@ -9,12 +10,10 @@ import {
   Input
 } from '@chakra-ui/react';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { User } from '@supabase/supabase-js';
+import { useUserStore } from '@stores/userStore';
 import * as Joi from 'joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-
-import logo from '../../../assets/logo-signin.svg';
+import { Link, useNavigate } from 'react-router-dom';
 
 export type SignInProps = {
   authController: AuthController;
@@ -33,6 +32,9 @@ const schema = Joi.object({
 });
 
 export function SignIn({ authController }: SignInProps) {
+  const navigate = useNavigate();
+  const { setToken } = useUserStore();
+
   const {
     register,
     handleSubmit,
@@ -46,8 +48,10 @@ export function SignIn({ authController }: SignInProps) {
     email,
     password
   }) => {
-    await authController.signIn<User>({ email, password });
-    // TODO: redirect to home and pass session to context
+    const { session } = await authController.signIn({ email, password });
+    setToken(session?.access_token);
+
+    navigate('/');
   };
 
   return (
