@@ -12,16 +12,23 @@ export function RecentEvaluationCard({
   ...boxProps
 }: RecentEvaluationCardProps) {
   return (
-    <Box className="w-full !grid grid-cols-2" {...boxProps}>
-      <Image boxSize="128px" src={asideComments} />
+    <Box
+      className="w-full !grid grid-cols-2 justify-items-center"
+      {...boxProps}
+    >
+      <Image
+        src={asideComments}
+        objectFit="cover"
+        fallbackSrc="https://via.placeholder.com/185"
+        className="my-3 w-[128px] h-[128px] md:w-[185px] md:h-[185px]"
+      />
 
       <Image
-        boxSize="128px"
         objectFit="cover"
         src={image}
         alt={`Imagem de perfil ${name}`}
-        fallbackSrc="https://via.placeholder.com/128"
-        className="my-3"
+        fallbackSrc="https://via.placeholder.com/185"
+        className="my-3 w-[128px] h-[128px] md:w-[185px] md:h-[185px]"
       />
     </Box>
   );

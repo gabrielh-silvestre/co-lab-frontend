@@ -15,23 +15,14 @@ import * as Joi from 'joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import type { SignInFormInput } from '.';
+
 export type SignInProps = {
   authController: AuthController;
+  schema: Joi.ObjectSchema;
 };
 
-type SignInFormInput = {
-  email: string;
-  password: string;
-};
-
-const schema = Joi.object({
-  email: Joi.string()
-    .email({ tlds: { allow: false } })
-    .required(),
-  password: Joi.string().required()
-});
-
-export function SignIn({ authController }: SignInProps) {
+export function SignIn({ authController, schema }: SignInProps) {
   const navigate = useNavigate();
   const { setToken } = useUserStore();
 
