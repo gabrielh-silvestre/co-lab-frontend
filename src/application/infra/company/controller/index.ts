@@ -55,6 +55,7 @@ export class CompanyController extends CompanyControllerAbs {
   }
 
   async addEvaluation(dto: InputAddEvaluationDto): Promise<void> {
-    await this.model.addEvaluation(dto.companyId, dto);
+    const { companyId, ...body } = dto;
+    await this.model.addEvaluation(companyId, body);
   }
 }
