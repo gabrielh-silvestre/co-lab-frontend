@@ -8,6 +8,11 @@ export interface InputGetCompanyByIdDto {
 
 export interface InputGetCompanyByNameDto {
   name: string;
+  page: number;
+}
+
+export interface InputGetLatestEvaluatedDto {
+  size?: number;
 }
 
 export interface InputCreateCompanyDto {
@@ -37,6 +42,11 @@ export abstract class CompanyControllerAbs {
   ): Promise<T>;
   abstract getByName<T = ICompany[]>(
     dto: InputGetCompanyByNameDto,
+    presenter?: null | IPresenter<ICompany[], T>
+  ): Promise<T>;
+
+  abstract getLatestEvaluated<T = ICompany[]>(
+    dto: InputGetLatestEvaluatedDto,
     presenter?: null | IPresenter<ICompany[], T>
   ): Promise<T>;
 
