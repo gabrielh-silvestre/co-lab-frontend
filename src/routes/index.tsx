@@ -1,4 +1,5 @@
 import { MakeHome } from '@pages/Home';
+import { MakeSearch } from '@pages/Search';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Landing } from '../ui/pages/Landing/Landing';
@@ -31,7 +32,7 @@ export const desktopRouter = createBrowserRouter([
   },
   {
     path: '/companies/search',
-    element: <div>Search</div>
+    element: <MakeSearch />
   },
   {
     path: '/sign-in',
