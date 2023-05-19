@@ -1,6 +1,7 @@
-import { AuthContainer } from "@auth/infra/container";
-import { createClient } from "@supabase/supabase-js";
-import { SignUp } from "./SignUp";
+import { AuthContainer } from '@auth/infra/container';
+import { createClient } from '@supabase/supabase-js';
+
+import { SignUp } from './SignUp';
 
 export function MakeSignUp() {
   const supabase = createClient(
