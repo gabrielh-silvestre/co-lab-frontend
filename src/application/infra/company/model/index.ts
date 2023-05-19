@@ -21,8 +21,12 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
   }
 
   async getAll(): Promise<ICompany[]> {
+    // TODO: correct search endpoint on API
+    // remove limit when done, only here as a workaround
     return super
-      .makeRequest<ICompany[]>('GET', '/companies')
+      .search({
+        limit: 1000
+      })
       .then((res) => res.data);
   }
 

@@ -1,8 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { Favorite } from '@pages/Favorite/Favorite';
+import { MakeHome } from '@pages/Home';
 import { FiCheck, FiHeart, FiMapPin } from 'react-icons/fi';
-
-import { Home } from '../Home/Home';
 
 export function Landing() {
   return (
@@ -27,7 +26,7 @@ export function Landing() {
 
       <TabPanels>
         <TabPanel className="container">
-          <Home />
+          <MakeHome />
         </TabPanel>
         <TabPanel className="container">
           <Favorite />

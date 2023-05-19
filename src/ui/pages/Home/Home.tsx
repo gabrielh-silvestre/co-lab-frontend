@@ -6,12 +6,36 @@ import {
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react';
+import type { ICompany } from '@company/domain/model';
+import { CompanyController } from '@company/infra/controller';
 import { CompanyRankingCard } from '@components/Card/CompanyRankingCard';
 import { RecentEvaluationCard } from '@components/Card/RecentEvaluationCard';
 import { Carousel } from '@components/Carousel/Carousel';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
-export function Home() {
+type HomeProps = {
+  companyController: CompanyController;
+};
+
+export function Home({ companyController }: HomeProps) {
+  const [companies, setCompanies] = useState<ICompany[]>([]);
+
+  useEffectOnce(() => {
+    getCompaniesOnRanking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+
+  const getCompaniesOnRanking = async () => {
+    // TODO: implement endpoint to get companies on ranking
+    // change .getAll() to .getOnRanking(n) when endpoint is ready
+    const companies = await companyController.getAll();
+
+    if (companies.length > 3) setCompanies(companies.slice(0, 3));
+    else setCompanies(companies);
+  };
+
   return (
     <>
       <Box className="sm:max-w-sm mb-8">
@@ -36,9 +60,12 @@ export function Home() {
         </Heading>
 
         <Box className="flex justify-between">
-          <CompanyRankingCard image="#" name="Empresa 1" />
+          {companies.map((c) => (
+            <CompanyRankingCard image={c.image ?? '#'} name={c.name} />
+          ))}
+          {/* <CompanyRankingCard image="#" name="Empresa 1" />
           <CompanyRankingCard image="#" name="Empresa 2" />
-          <CompanyRankingCard image="#" name="Empresa 3" />
+          <CompanyRankingCard image="#" name="Empresa 3" /> */}
         </Box>
       </Box>
 
