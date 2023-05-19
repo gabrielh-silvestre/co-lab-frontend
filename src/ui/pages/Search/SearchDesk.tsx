@@ -24,7 +24,6 @@ export function SearchDesk({ companyController }: SearchDeskProps) {
           name: searchTerm,
           page: 1
         });
-        console.log('foundCompanies', foundCompanies)
 
         setCompanies(foundCompanies);
         return;
