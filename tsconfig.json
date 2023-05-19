@@ -38,7 +38,8 @@
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/ui/components/*"],
       "@pages/*": ["./src/ui/pages/*"],
-      "@stores/*": ["./src/stores/*"]
+      "@stores/*": ["./src/stores/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src", "tests"],
