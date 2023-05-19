@@ -61,11 +61,12 @@ export function Home({ companyController }: HomeProps) {
 
         <Box className="flex justify-between">
           {companies.map((c) => (
-            <CompanyRankingCard image={c.image ?? '#'} name={c.name} />
+            <CompanyRankingCard
+              key={c.id}
+              image={c.image ?? '#'}
+              name={c.name}
+            />
           ))}
-          {/* <CompanyRankingCard image="#" name="Empresa 1" />
-          <CompanyRankingCard image="#" name="Empresa 2" />
-          <CompanyRankingCard image="#" name="Empresa 3" /> */}
         </Box>
       </Box>
 
