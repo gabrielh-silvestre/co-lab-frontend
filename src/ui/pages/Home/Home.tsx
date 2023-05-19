@@ -6,8 +6,8 @@ import {
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react';
+import type { CompanyControllerAbs } from '@company/domain/controller';
 import type { ICompany } from '@company/domain/model';
-import { CompanyController } from '@company/infra/controller';
 import { CompanyRankingCard } from '@components/Card/CompanyRankingCard';
 import { RecentEvaluationCard } from '@components/Card/RecentEvaluationCard';
 import { Carousel } from '@components/Carousel/Carousel';
@@ -16,25 +16,20 @@ import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 type HomeProps = {
-  companyController: CompanyController;
+  companyController: CompanyControllerAbs;
 };
 
 export function Home({ companyController }: HomeProps) {
-  const [companies, setCompanies] = useState<ICompany[]>([]);
+  const [lastRelates, setLastRelates] = useState<ICompany[]>([]);
 
   useEffectOnce(() => {
-    getCompaniesOnRanking();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getLastRelates = async () => {
+      const companies = await companyController.getLatestEvaluated({ size: 3 });
+      setLastRelates(companies);
+    };
+
+    getLastRelates();
   });
-
-  const getCompaniesOnRanking = async () => {
-    // TODO: implement endpoint to get companies on ranking
-    // change .getAll() to .getOnRanking(n) when endpoint is ready
-    const companies = await companyController.getAll();
-
-    if (companies.length > 3) setCompanies(companies.slice(0, 3));
-    else setCompanies(companies);
-  };
 
   return (
     <>
@@ -60,13 +55,19 @@ export function Home({ companyController }: HomeProps) {
         </Heading>
 
         <Box className="flex justify-between">
-          {companies.map((c) => (
-            <CompanyRankingCard
-              key={c.id}
-              image={c.image ?? '#'}
-              name={c.name}
-            />
-          ))}
+          {lastRelates.length === 0
+            ? Array.from({ length: 3 }).map((_, i) => (
+                <CompanyRankingCard name={`Empresa ${i}`} image="#" />
+              ))
+            : lastRelates
+                .reverse()
+                .map((c) => (
+                  <CompanyRankingCard
+                    name={c.name}
+                    image={c.image ?? '#'}
+                    key={c.id}
+                  />
+                ))}
         </Box>
       </Box>
 
@@ -76,9 +77,17 @@ export function Home({ companyController }: HomeProps) {
         </Heading>
 
         <Carousel className="mx-14">
-          <RecentEvaluationCard image="#" name="Empresa 1" />
-          <RecentEvaluationCard image="#" name="Empresa 2" />
-          <RecentEvaluationCard image="#" name="Empresa 3" />
+          {lastRelates.length === 0
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <RecentEvaluationCard image="#" name={`Empresa ${i}`} />
+              ))
+            : lastRelates.map((c) => (
+                <RecentEvaluationCard
+                  image={c.image ?? '#'}
+                  name={c.name}
+                  key={c.id}
+                />
+              ))}
         </Carousel>
       </Box>
     </>

@@ -11,5 +11,5 @@ export function MakeHome() {
   const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
   if (!isDesktop) return <Home companyController={companyController} />;
-  return <HomeDesk />;
+  return <HomeDesk companyController={companyController} />;
 }
