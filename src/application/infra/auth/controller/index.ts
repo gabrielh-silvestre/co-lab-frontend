@@ -11,7 +11,7 @@ export type InputSignInDto = {
 export class AuthController {
   constructor(private readonly model: IAuthModel<AuthOutput>) {}
 
-  async signIn<T>(
+  async signIn<T = AuthOutput>(
     dto: InputSignInDto,
     presenter: IPresenter<AuthOutput, T> | null = null
   ): Promise<T> {
@@ -19,7 +19,7 @@ export class AuthController {
     return presenter ? presenter(result) : (result as T);
   }
 
-  async signUp<T>(
+  async signUp<T = AuthOutput>(
     dto: InputSignInDto,
     presenter: IPresenter<AuthOutput, T> | null = null
   ): Promise<T> {

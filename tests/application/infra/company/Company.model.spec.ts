@@ -29,12 +29,16 @@ describe('[Unit] Tests for CompanyModel', () => {
   });
 
   it('should get all companies', async () => {
-    axiosMock.onGet('/companies').reply(200, [COMPANY]);
+    axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
     const result = await model.getAll();
 
     expect(spyMakeRequest).toHaveBeenCalled();
-    expect(spyMakeRequest).toHaveBeenCalledWith('GET', '/companies');
+    expect(spyMakeRequest).toHaveBeenCalledWith(
+      'GET',
+      '/companies/search',
+      expect.anything() // Needed to avoid comparing the params object, which is a workaround
+    );
 
     expect(Array.isArray(result)).toBe(true);
     expect(result).toHaveLength(1);

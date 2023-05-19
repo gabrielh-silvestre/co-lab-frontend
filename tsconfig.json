@@ -23,13 +23,23 @@
     "paths": {
       "@worker/domain/*": ["./src/application/domain/worker/*"],
       "@worker/infra/*": ["./src/application/infra/worker/*"],
+
       "@company/domain/*": ["./src/application/domain/company/*"],
       "@company/infra/*": ["./src/application/infra/company/*"],
+
       "@auth/domain/*": ["./src/application/domain/auth/*"],
       "@auth/infra/*": ["./src/application/infra/auth/*"],
+
       "@shared/domain/*": ["./src/application/domain/shared/*"],
       "@shared/infra/*": ["./src/application/infra/shared/*"],
-      "@mocks/*": ["./tests/mock/*"]
+
+      "@mocks/*": ["./tests/mock/*"],
+
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/ui/components/*"],
+      "@pages/*": ["./src/ui/pages/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src", "tests"],

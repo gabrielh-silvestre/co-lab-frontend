@@ -22,14 +22,19 @@ export class AuthSupabaseModel implements IAuthModel<AuthOutput> {
 
   async signUp(email: string, password: string): Promise<AuthOutput> {
     const {
-      data: { user, session },
+      data: { user },
       error
     } = await this.client.auth.signUp({
       email,
       password
     });
+    if (error || !user) throw error;
 
-    if (error || !user || !session) throw error;
+    const {
+      data: { session },
+      error: sessionError
+    } = await this.client.auth.signInWithPassword({ email, password });
+    if (sessionError || !session) throw sessionError;
 
     return { user, session };
   }
