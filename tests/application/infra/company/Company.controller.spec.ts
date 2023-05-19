@@ -44,7 +44,7 @@ describe('[Integration] Tests for CompanyController', () => {
   });
 
   it('should get all companies', async () => {
-    axiosMock.onGet('/companies').reply(200, [COMPANY]);
+    axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
     const result = await controller.getAll();
 
@@ -71,7 +71,7 @@ describe('[Integration] Tests for CompanyController', () => {
   });
 
   it('should allow get all companies response to be transformed', async () => {
-    axiosMock.onGet('/companies').reply(200, [COMPANY]);
+    axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
     const all = await controller.getAll((companies) =>
       companies.map((c) => ({ id: c.id, name: c.name }))
