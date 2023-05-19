@@ -37,14 +37,18 @@ export function SearchDesk({ companyController }: SearchDeskProps) {
 
   return (
     <>
-      <HeaderDesk />
+      <HeaderDesk location="companies" />
 
       <Box
         as="main"
         className="flex flex-col justify-center items-center my-16 px-36"
       >
         <Box>
-          <Heading as="h3">Pesquisa por: "{searchTerm}"</Heading>
+          {searchTerm === '' ? (
+            <Heading as="h3">Empresas</Heading>
+          ) : (
+            <Heading as="h3">Pesquisa por: "{searchTerm}"</Heading>
+          )}
         </Box>
 
         <Box className="w-full mt-8">

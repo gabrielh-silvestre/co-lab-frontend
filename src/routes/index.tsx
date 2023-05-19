@@ -27,10 +27,6 @@ export const desktopRouter = createBrowserRouter([
     element: <MakeHome />
   },
   {
-    path: '/companies',
-    element: <MakeHome />
-  },
-  {
     path: '/companies/search',
     element: <MakeSearch />
   },

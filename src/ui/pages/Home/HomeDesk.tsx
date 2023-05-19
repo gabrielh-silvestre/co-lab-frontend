@@ -26,7 +26,7 @@ export function HomeDesk() {
 
   return (
     <>
-      <HeaderDesk />
+      <HeaderDesk location="home" />
 
       <Box as="main">
         <Box as="article">

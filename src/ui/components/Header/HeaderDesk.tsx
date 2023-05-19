@@ -1,8 +1,13 @@
 import logo from '@assets/logo-header.svg';
 import { Box, Image } from '@chakra-ui/react';
 import { FiHeart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-export function HeaderDesk() {
+type HeaderDeskProps = {
+  location: 'home' | 'companies' | 'contribute';
+};
+
+export function HeaderDesk({ location }: HeaderDeskProps) {
   return (
     <Box
       as="header"
@@ -21,9 +26,21 @@ export function HeaderDesk() {
 
       <div>
         <nav className="flex text-xl font-bold">
-          <div>Home</div>
-          <div className="ml-3">Empresas</div>
-          <div className="ml-3">Contribuir</div>
+          <Box textColor={location === 'home' ? 'background' : 'black'}>
+            <Link to="/">Home</Link>
+          </Box>
+          <Box
+            textColor={location === 'companies' ? 'background' : 'black'}
+            className="ml-3"
+          >
+            <Link to="/companies/search">Empresas</Link>
+          </Box>
+          <Box
+            textColor={location === 'contribute' ? 'background' : 'black'}
+            className="ml-3"
+          >
+            Contribuir
+          </Box>
         </nav>
       </div>
 
