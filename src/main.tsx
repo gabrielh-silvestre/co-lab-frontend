@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
 import './index.css';
-import { router } from './routes/index.tsx';
+import { desktopRouter, mobileRouter } from './routes/index.tsx';
 
 const theme = extendTheme({
   colors: {
@@ -15,10 +15,16 @@ const theme = extendTheme({
   }
 });
 
+const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router} />
+      {isDesktop ? (
+        <RouterProvider router={desktopRouter} />
+      ) : (
+        <RouterProvider router={mobileRouter} />
+      )}
     </ChakraProvider>
   </React.StrictMode>
 );
