@@ -1,5 +1,6 @@
 import type {
   ICompany,
+  ICompanyDetailed,
   ICompanyInput,
   ICompanyModel,
   IEvaluationInput
@@ -30,7 +31,7 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
       .then((res) => res.data);
   }
 
-  async getById(id: string): Promise<ICompany> {
+  async getById(id: string): Promise<ICompanyDetailed> {
     return this.fetch(id).then((res) => res.data);
   }
 

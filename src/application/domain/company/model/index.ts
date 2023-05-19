@@ -22,12 +22,13 @@ export interface ICompany {
   id: string;
   name: string;
   image: string | null;
-  description: string | null;
-
-  evaluations: IEvaluation[];
-
+  rating: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ICompanyDetailed extends ICompany {
+  evaluations: IEvaluation[];
 }
 
 export interface ICompanyInput {
@@ -38,9 +39,9 @@ export interface ICompanyInput {
 
 export interface ICompanyModel {
   getAll(): Promise<ICompany[]>;
-  getById(id: string): Promise<ICompany>;
+  getById(id: string): Promise<ICompanyDetailed>;
   getByName(name: string): Promise<ICompany[]>;
 
-  create(input: ICompanyInput): Promise<Omit<ICompany, 'evaluations'>>;
+  create(input: ICompanyInput): Promise<ICompany>;
   addEvaluation(companyId: string, input: IEvaluationInput): Promise<void>;
 }

@@ -16,15 +16,14 @@ export function CompanyRankingCard({
       <FiStar className="text-2xl text-primary" />
 
       <Image
-        boxSize="50px"
         objectFit="cover"
         src={image}
         alt={`Imagem de perfil ${name}`}
-        fallbackSrc="https://via.placeholder.com/50"
-        className="my-3"
+        fallbackSrc="https://via.placeholder.com/110"
+        className="my-3 w-[50px] h-[50px] md:w-[110px] md:h-[110px] md:mx-4"
       />
 
-      <p className="text-primary">Empresa 1</p>
+      <p className="text-primary">{name}</p>
     </Box>
   );
 }
