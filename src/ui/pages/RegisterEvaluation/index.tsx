@@ -30,6 +30,7 @@ export function MakeRegisterEvaluation() {
 
   const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
-  if (!isDesktop) return <RegisterEvaluation />;
+  if (!isDesktop)
+    return <RegisterEvaluation companyController={companyController} />;
   return <RegisterEvaluationDesk companyController={companyController} />;
 }

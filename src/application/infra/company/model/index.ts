@@ -55,7 +55,7 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
       'PATCH',
       `/companies/${companyId}/add-evaluation`,
       { data: input },
-      { Authorization: `Bearer ${this.accessToken}` }
+      this.accessToken ? { Authorization: `Bearer ${this.accessToken}` } : {}
     );
   }
 }
