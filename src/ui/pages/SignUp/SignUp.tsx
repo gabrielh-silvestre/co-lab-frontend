@@ -9,28 +9,18 @@ import {
   Input
 } from '@chakra-ui/react';
 import { joiResolver } from '@hookform/resolvers/joi';
+import { SignInFormInput } from '@pages/SignIn';
 import { useUserStore } from '@stores/userStore';
 import * as Joi from 'joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-type SignInFormInput = {
-  email: string;
-  password: string;
-};
-
-const schema = Joi.object({
-  email: Joi.string()
-    .email({ tlds: { allow: false } })
-    .required(),
-  password: Joi.string().required()
-});
-
 type SignUpProps = {
   authController: AuthController;
+  schema: Joi.ObjectSchema;
 };
 
-export function SignUp({ authController }: SignUpProps) {
+export function SignUp({ authController, schema }: SignUpProps) {
   const navigate = useNavigate();
   const { setToken } = useUserStore();
   const {

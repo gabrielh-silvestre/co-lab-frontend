@@ -1,7 +1,9 @@
 import { AuthContainer } from '@auth/infra/container';
 import { createClient } from '@supabase/supabase-js';
+import * as Joi from 'joi';
 
 import { SignUp } from './SignUp';
+import { SignUpDesk } from './SignUpDesk';
 
 export function MakeSignUp() {
   const supabase = createClient(
@@ -11,5 +13,16 @@ export function MakeSignUp() {
 
   const authController = AuthContainer.buildSupabase(supabase);
 
-  return <SignUp authController={authController} />;
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required(),
+    password: Joi.string().required()
+  });
+
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+  if (!isDesktop)
+    return <SignUp authController={authController} schema={schema} />;
+  return <SignUpDesk authController={authController} schema={schema} />;
 }

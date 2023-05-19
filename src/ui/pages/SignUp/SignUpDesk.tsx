@@ -1,4 +1,4 @@
-import logo from '@assets/desk-signin-illustration.svg';
+import logo from '@assets/desk-signup-illustration.svg';
 import { AuthController } from '@auth/infra/controller';
 import {
   Box,
@@ -11,22 +11,20 @@ import {
 } from '@chakra-ui/react';
 import { HeaderDesk } from '@components/Header/HeaderDesk';
 import { joiResolver } from '@hookform/resolvers/joi';
+import { SignInFormInput } from '@pages/SignIn';
 import { useUserStore } from '@stores/userStore';
 import * as Joi from 'joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-
-import type { SignInFormInput } from '.';
+import { useNavigate } from 'react-router-dom';
 
 type SignInProps = {
   authController: AuthController;
   schema: Joi.ObjectSchema;
 };
 
-export function SignInDesk({ authController, schema }: SignInProps) {
+export function SignUpDesk({ authController, schema }: SignInProps) {
   const navigate = useNavigate();
   const { setToken } = useUserStore();
-
   const {
     register,
     handleSubmit,
@@ -40,7 +38,7 @@ export function SignInDesk({ authController, schema }: SignInProps) {
     email,
     password
   }) => {
-    const { session } = await authController.signIn({ email, password });
+    const { session } = await authController.signUp({ email, password });
     setToken(session?.access_token);
 
     navigate('/');
@@ -50,15 +48,16 @@ export function SignInDesk({ authController, schema }: SignInProps) {
     <>
       <HeaderDesk location="sign" />
 
-      <Box className="w-full p-48 h-screen flex flex-col justify-center bg-backgorund">
-        <Box className="mb-8">
+      <Box className="px-48 h-screen flex flex-col justify-center content-center bg-backgorund">
+        <Box className="mb-8 text-4xl font-bold text-primary grid grid-cols-2 justify-items-center items-center">
+          <h1>Faça parte desse movimento:</h1>
+
           <Image
-            boxSize={500}
-            objectFit="contain"
-            src={logo ?? '#'}
+            boxSize={300}
+            objectFit="cover"
+            src={logo}
             alt="logo"
             fallbackSrc="https://via.placeholder.com/300"
-            className="mx-auto"
           />
         </Box>
 
@@ -71,9 +70,11 @@ export function SignInDesk({ authController, schema }: SignInProps) {
                   placeholder="Email"
                   variant="filled"
                   rounded="full"
-                  className="!bg-primary opacity-60"
-                  _placeholder={{ textColor: 'black' }}
-                  _focus={{ borderColor: 'backgorund' }}
+                  backgroundColor="primary"
+                  className="opacity-40"
+                  borderColor="black"
+                  _focus={{ borderColor: 'primary' }}
+                  _placeholder={{ color: 'black' }}
                   {...register('email', { required: true })}
                 />
 
@@ -89,9 +90,11 @@ export function SignInDesk({ authController, schema }: SignInProps) {
                   type="password"
                   variant="filled"
                   rounded="full"
-                  className="!bg-primary opacity-60"
-                  _placeholder={{ textColor: 'black' }}
-                  _focus={{ borderColor: 'backgorund' }}
+                  backgroundColor="primary"
+                  className="opacity-40"
+                  borderColor="black"
+                  _focus={{ borderColor: 'primary' }}
+                  _placeholder={{ color: 'black' }}
                   {...register('password', { required: true })}
                 />
 
@@ -105,25 +108,19 @@ export function SignInDesk({ authController, schema }: SignInProps) {
                   type="submit"
                   isLoading={isSubmitting}
                   bgColor="primary"
-                  color="Background"
+                  color="background"
                   spinnerPlacement="start"
                   fontWeight="bold"
                   rounded="full"
                   px="12"
+                  _loading={{ bgColor: 'primary' }}
                 >
-                  Entrar
+                  Cadastrar
                 </Button>
               </Box>
             </FormControl>
           </form>
         </div>
-
-        <Box className="flex justify-center mt-8 text-detail">
-          <p>Nova por aqui?</p>
-          <Link className="ml-2 underline" to="/sign-up">
-            Cadastre-se
-          </Link>
-        </Box>
       </Box>
     </>
   );

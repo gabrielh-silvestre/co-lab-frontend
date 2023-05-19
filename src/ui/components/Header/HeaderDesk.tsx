@@ -1,13 +1,15 @@
 import logo from '@assets/logo-header.svg';
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Button, Image } from '@chakra-ui/react';
 import { FiHeart } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type HeaderDeskProps = {
-  location: 'home' | 'companies' | 'contribute';
+  location: 'home' | 'companies' | 'contribute' | 'sign';
 };
 
 export function HeaderDesk({ location }: HeaderDeskProps) {
+  const navigate = useNavigate();
+
   return (
     <Box
       as="header"
@@ -48,13 +50,18 @@ export function HeaderDesk({ location }: HeaderDeskProps) {
         <button type="button">
           <FiHeart className="text-backgorund w-8 h-8 mr-4" />
         </button>
-        <button
+        <Button
           disabled
           type="button"
-          className="bg-backgorund rounded-full text-primary text-xs py-1 px-4"
+          bgColor={location === 'sign' ? 'transparent' : 'background'}
+          textColor={location === 'sign' ? 'black' : 'primary'}
+          borderColor={location === 'sign' ? 'black' : 'primary'}
+          border="1px solid"
+          className="!rounded-full !text-xs !py-1 !px-8"
+          onClick={() => navigate('/sign-in')}
         >
-          <Link to="/sign-in">Entrar</Link>
-        </button>
+          Entrar
+        </Button>
       </div>
     </Box>
   );
