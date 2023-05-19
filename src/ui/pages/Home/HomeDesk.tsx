@@ -8,21 +8,42 @@ import {
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react';
+import type { CompanyControllerAbs } from '@company/domain/controller';
+import type { ICompany } from '@company/domain/model';
 import { CompanyRankingCard } from '@components/Card/CompanyRankingCard';
 import { RecentEvaluationCard } from '@components/Card/RecentEvaluationCard';
 import { Carousel } from '@components/Carousel/Carousel';
 import { HeaderDesk } from '@components/Header/HeaderDesk';
+import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-export function HomeDesk() {
+type HomeDeskProps = {
+  companyController: CompanyControllerAbs;
+};
+
+export function HomeDesk({ companyController }: HomeDeskProps) {
   const navigate = useNavigate();
+
+  const [lastRelates, setLastRelates] = useState<ICompany[]>([]);
   const [companyName, setCompanyName] = useState<string>('');
 
   const handleSearch = async () => {
     navigate(`/companies/search?name=${companyName}`);
   };
+
+  useEffectOnce(() => {
+    // TODO: get companies podium
+    // need to re-model the DB
+
+    const getLastRelates = async () => {
+      const companies = await companyController.getLatestEvaluated({ size: 3 });
+      setLastRelates(companies);
+    };
+
+    getLastRelates();
+  });
 
   return (
     <>
@@ -85,9 +106,19 @@ export function HomeDesk() {
             </Heading>
 
             <Box className="flex justify-center items-center mt-4">
-              <CompanyRankingCard name="Empresa 1" image="#" />
-              <CompanyRankingCard name="Empresa 1" image="#" />
-              <CompanyRankingCard name="Empresa 1" image="#" />
+              {lastRelates.length === 0
+                ? Array.from({ length: 3 }).map((_, i) => (
+                    <CompanyRankingCard name={`Empresa ${i}`} image="#" />
+                  ))
+                : lastRelates
+                    .reverse()
+                    .map((c) => (
+                      <CompanyRankingCard
+                        name={c.name}
+                        image={c.image ?? '#'}
+                        key={c.id}
+                      />
+                    ))}
             </Box>
           </Box>
 
@@ -97,9 +128,17 @@ export function HomeDesk() {
             </Heading>
 
             <Carousel>
-              <RecentEvaluationCard image="#" name="Empresa 1" />
-              <RecentEvaluationCard image="#" name="Empresa 2" />
-              <RecentEvaluationCard image="#" name="Empresa 3" />
+              {lastRelates.length === 0
+                ? Array.from({ length: 4 }).map((_, i) => (
+                    <RecentEvaluationCard image="#" name={`Empresa ${i}`} />
+                  ))
+                : lastRelates.map((c) => (
+                    <RecentEvaluationCard
+                      image={c.image ?? '#'}
+                      name={c.name}
+                      key={c.id}
+                    />
+                  ))}
             </Carousel>
           </Box>
         </Box>

@@ -3,7 +3,8 @@ import {
   InputAddEvaluationDto,
   InputCreateCompanyDto,
   InputGetCompanyByIdDto,
-  InputGetCompanyByNameDto
+  InputGetCompanyByNameDto,
+  InputGetLatestEvaluatedDto
 } from '@company/domain/controller';
 import type { ICompany } from '@company/domain/model';
 import type { IPresenter } from '@shared/domain/controller';
@@ -25,10 +26,23 @@ export class CompanyController extends CompanyControllerAbs {
   }
 
   async getByName<T = ICompany[]>(
-    { name }: InputGetCompanyByNameDto,
+    { name, page }: InputGetCompanyByNameDto,
     presenter: IPresenter<ICompany[], T> | null = null
   ): Promise<T> {
-    const result = await this.model.getByName(name);
+    // TODO: add pagination, page is not really working
+    const result = await this.model.search({
+      field: 'name',
+      value: name,
+      page
+    });
+    return presenter ? presenter(result) : (result as T);
+  }
+
+  async getLatestEvaluated<T = ICompany[]>(
+    dto: InputGetLatestEvaluatedDto,
+    presenter?: IPresenter<ICompany[], T> | null | undefined
+  ): Promise<T> {
+    const result = await this.model.getLatestEvaluated(dto.size);
     return presenter ? presenter(result) : (result as T);
   }
 
@@ -41,6 +55,7 @@ export class CompanyController extends CompanyControllerAbs {
   }
 
   async addEvaluation(dto: InputAddEvaluationDto): Promise<void> {
-    await this.model.addEvaluation(dto.companyId, dto);
+    const { companyId, ...body } = dto;
+    await this.model.addEvaluation(companyId, body);
   }
 }

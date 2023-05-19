@@ -8,7 +8,9 @@ import type {
 import { CustomAxiosClient } from '@shared/infra/client-core/CustomAxios.client-core';
 
 export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
-  constructor(baseURL: string) {
+  private readonly accessToken: string | null = null;
+
+  constructor(baseURL: string, token: string | null = null) {
     super({
       baseURL,
       appName: 'company',
@@ -19,24 +21,26 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
         update: '/companies/{id}'
       }
     });
+
+    this.accessToken = token;
+  }
+
+  async search(params?: object | undefined): Promise<ICompany[]> {
+    return super.search(params).then((res) => res.data);
   }
 
   async getAll(): Promise<ICompany[]> {
-    // TODO: correct search endpoint on API
-    // remove limit when done, only here as a workaround
-    return super
-      .search({
-        limit: 1000
-      })
-      .then((res) => res.data);
+    return super.search().then((res) => res.data);
   }
 
   async getById(id: string): Promise<ICompanyDetailed> {
     return this.fetch(id).then((res) => res.data);
   }
 
-  async getByName(name: string): Promise<ICompany[]> {
-    return this.search({ name }).then((res) => res.data);
+  async getLatestEvaluated(size?: number): Promise<ICompany[]> {
+    return this.makeRequest('GET', '/companies/evaluations', {
+      params: size ? { size } : undefined
+    }).then((res) => res.data as ICompany[]);
   }
 
   async create(input: ICompanyInput): Promise<Omit<ICompany, 'evaluations'>> {
@@ -49,11 +53,9 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
   ): Promise<void> {
     await super.makeRequest(
       'PATCH',
-      `${this.clientOptions.endpoints.update}/add-evaluation`,
-      {
-        data: input,
-        params: { id: companyId }
-      }
+      `/companies/${companyId}/add-evaluation`,
+      { data: input },
+      this.accessToken ? { Authorization: `Bearer ${this.accessToken}` } : {}
     );
   }
 }

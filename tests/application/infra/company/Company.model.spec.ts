@@ -60,11 +60,15 @@ describe('[Unit] Tests for CompanyModel', () => {
   it('should get company by name', async () => {
     axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
-    const result = await model.getByName('company');
+    const result = await model.search({
+      field: 'name',
+      value: 'company',
+      page: 1
+    });
 
     expect(spyMakeRequest).toHaveBeenCalled();
     expect(spyMakeRequest).toHaveBeenCalledWith('GET', '/companies/search', {
-      params: { name: 'company' }
+      params: { field: 'name', value: 'company', page: 1 }
     });
 
     expect(Array.isArray(result)).toBe(true);
@@ -100,14 +104,14 @@ describe('[Unit] Tests for CompanyModel', () => {
     expect(spyMakeRequest).toHaveBeenCalled();
     expect(spyMakeRequest).toHaveBeenCalledWith(
       'PATCH',
-      '/companies/{id}/add-evaluation',
+      '/companies/1/add-evaluation',
       {
         data: {
           comment: 'comment',
           categories: [{ name: 'category', rating: 3 }]
-        },
-        params: { id: '1' }
-      }
+        }
+      },
+      {}
     );
   });
 });

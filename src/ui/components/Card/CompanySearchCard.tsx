@@ -22,7 +22,7 @@ export function CompanySearchCard({
       <Box>
         <Image
           boxSize={188}
-          objectFit="cover"
+          objectFit="contain"
           src={image ?? '#'}
           alt={`Imagem da empresa ${name}`}
           fallbackSrc="https://via.placeholder.com/188"

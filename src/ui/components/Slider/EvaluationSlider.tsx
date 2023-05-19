@@ -13,20 +13,22 @@ import { useState } from 'react';
 type EvaluationSliderProps = {
   id: string;
   label: string;
+  handleChange?: (value: number) => void;
 } & SliderProps;
 
 export function EvaluationSlider({
   id,
   label,
+  handleChange,
   ...sliderProps
 }: EvaluationSliderProps) {
   const [sliderValue, setSliderValue] = useState(5);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const handleChange = (value: number) => {
+  const onChange = (value: number) => {
     setSliderValue(value);
 
-    if (sliderProps.onChange) sliderProps.onChange(value);
+    if (handleChange) handleChange(value);
   };
 
   const labelStyles = {
@@ -41,16 +43,17 @@ export function EvaluationSlider({
       <Slider
         id={id}
         defaultValue={5}
+        min={1}
         max={10}
         step={1}
-        onChange={handleChange}
+        onChange={onChange}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         className="text-black"
         {...sliderProps}
       >
-        <SliderMark {...labelStyles} value={0}>
-          0
+        <SliderMark {...labelStyles} value={1}>
+          1
         </SliderMark>
         <SliderMark {...labelStyles} value={5}>
           5

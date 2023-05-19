@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { Favorite } from '@pages/Favorite/Favorite';
 import { MakeHome } from '@pages/Home';
-import { RegisterEvaluation } from '@pages/RegisterEvaluation/RegisterEvaluation';
+import { MakeRegisterEvaluation } from '@pages/RegisterEvaluation';
 import { FiCheck, FiHeart, FiMapPin } from 'react-icons/fi';
 
 export function Landing() {
@@ -33,7 +33,7 @@ export function Landing() {
           <Favorite />
         </TabPanel>
         <TabPanel className="container">
-          <RegisterEvaluation />
+          <MakeRegisterEvaluation />
         </TabPanel>
       </TabPanels>
     </Tabs>
