@@ -14,7 +14,7 @@ export function FavoriteCompanyCard({
     <Box className="w-full flex justify-between items-center" {...boxProps}>
       <Image
         boxSize="80px"
-        objectFit="cover"
+        objectFit="contain"
         src={image}
         alt={`Imagem de perfil ${name}`}
         fallbackSrc="https://via.placeholder.com/80"

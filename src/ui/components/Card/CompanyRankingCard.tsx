@@ -16,7 +16,7 @@ export function CompanyRankingCard({
       <FiStar className="text-2xl text-primary" />
 
       <Image
-        objectFit="cover"
+        objectFit="contain"
         src={image}
         alt={`Imagem de perfil ${name}`}
         fallbackSrc="https://via.placeholder.com/110"
