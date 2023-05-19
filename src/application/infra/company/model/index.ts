@@ -8,7 +8,9 @@ import type {
 import { CustomAxiosClient } from '@shared/infra/client-core/CustomAxios.client-core';
 
 export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
-  constructor(baseURL: string) {
+  private readonly accessToken: string | null = null;
+
+  constructor(baseURL: string, token: string | null = null) {
     super({
       baseURL,
       appName: 'company',
@@ -19,6 +21,8 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
         update: '/companies/{id}'
       }
     });
+
+    this.accessToken = token;
   }
 
   async search(params?: object | undefined): Promise<ICompany[]> {
@@ -49,11 +53,9 @@ export class CompanyModel extends CustomAxiosClient implements ICompanyModel {
   ): Promise<void> {
     await super.makeRequest(
       'PATCH',
-      `${this.clientOptions.endpoints.update}/add-evaluation`,
-      {
-        data: input,
-        params: { id: companyId }
-      }
+      `/companies/${companyId}/add-evaluation`,
+      { data: input },
+      this.accessToken ? { Authorization: `Bearer ${this.accessToken}` } : {}
     );
   }
 }

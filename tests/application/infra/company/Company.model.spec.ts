@@ -104,14 +104,14 @@ describe('[Unit] Tests for CompanyModel', () => {
     expect(spyMakeRequest).toHaveBeenCalled();
     expect(spyMakeRequest).toHaveBeenCalledWith(
       'PATCH',
-      '/companies/{id}/add-evaluation',
+      '/companies/1/add-evaluation',
       {
         data: {
           comment: 'comment',
           categories: [{ name: 'category', rating: 3 }]
-        },
-        params: { id: '1' }
-      }
+        }
+      },
+      {}
     );
   });
 });
