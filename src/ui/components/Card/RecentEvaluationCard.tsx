@@ -18,13 +18,13 @@ export function RecentEvaluationCard({
     >
       <Image
         src={asideComments}
-        objectFit="cover"
+        objectFit="contain"
         fallbackSrc="https://via.placeholder.com/185"
         className="my-3 w-[128px] h-[128px] md:w-[185px] md:h-[185px]"
       />
 
       <Image
-        objectFit="cover"
+        objectFit="contain"
         src={image}
         alt={`Imagem de perfil ${name}`}
         fallbackSrc="https://via.placeholder.com/185"

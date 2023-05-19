@@ -64,7 +64,7 @@ describe('[Integration] Tests for CompanyController', () => {
   it('should get company by name', async () => {
     axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
-    const result = await controller.getByName({ name: 'company' });
+    const result = await controller.getByName({ name: 'company', page: 1 });
 
     expect(spyRequest).toHaveBeenCalledTimes(1);
     expect(result).toStrictEqual([COMPANY]);
@@ -107,7 +107,7 @@ describe('[Integration] Tests for CompanyController', () => {
     axiosMock.onGet('/companies/search').reply(200, [COMPANY]);
 
     const result = await controller.getByName(
-      { name: 'company' },
+      { name: 'company', page: 1 },
       (companies) => companies.map((c) => ({ id: c.id, name: c.name }))
     );
 

@@ -37,10 +37,18 @@ export interface ICompanyInput {
   description?: string;
 }
 
+export interface ICompanySearchQuery {
+  field?: 'name' | 'description';
+  value: string;
+  page: number;
+}
+
 export interface ICompanyModel {
   getAll(): Promise<ICompany[]>;
   getById(id: string): Promise<ICompanyDetailed>;
-  getByName(name: string): Promise<ICompany[]>;
+  getLatestEvaluated(n?: number): Promise<ICompany[]>;
+
+  search(input: ICompanySearchQuery): Promise<ICompany[]>;
 
   create(input: ICompanyInput): Promise<ICompany>;
   addEvaluation(companyId: string, input: IEvaluationInput): Promise<void>;

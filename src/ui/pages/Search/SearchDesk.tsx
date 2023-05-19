@@ -21,7 +21,8 @@ export function SearchDesk({ companyController }: SearchDeskProps) {
     const searchCompanies = async () => {
       if (searchTerm !== '') {
         const foundCompanies = await companyController.getByName({
-          name: searchTerm
+          name: searchTerm,
+          page: 1
         });
 
         setCompanies(foundCompanies);
