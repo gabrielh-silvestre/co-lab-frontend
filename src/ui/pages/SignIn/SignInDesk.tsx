@@ -1,12 +1,12 @@
-import logo from '@assets/logo-signin.svg';
+import logo from '@assets/desk-signin-illustration.svg';
 import { AuthController } from '@auth/infra/controller';
 import {
   Box,
   Button,
-  Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Image,
   Input
 } from '@chakra-ui/react';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -17,12 +17,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import type { SignInFormInput } from '.';
 
-export type SignInProps = {
+type SignInProps = {
   authController: AuthController;
   schema: Joi.ObjectSchema;
 };
 
-export function SignIn({ authController, schema }: SignInProps) {
+export function SignInDesk({ authController, schema }: SignInProps) {
   const navigate = useNavigate();
   const { setToken } = useUserStore();
 
@@ -46,9 +46,16 @@ export function SignIn({ authController, schema }: SignInProps) {
   };
 
   return (
-    <Container className="h-screen flex flex-col justify-center content-center bg-primary">
-      <Box className="sm:max-w-sm mb-8">
-        <img className="w-full" src={logo} alt="logo" />
+    <Box className="w-full p-48 h-screen flex flex-col justify-center bg-backgorund">
+      <Box className="mb-8">
+        <Image
+          boxSize={500}
+          objectFit="contain"
+          src={logo ?? '#'}
+          alt="logo"
+          fallbackSrc="https://via.placeholder.com/300"
+          className="mx-auto"
+        />
       </Box>
 
       <div>
@@ -60,6 +67,8 @@ export function SignIn({ authController, schema }: SignInProps) {
                 placeholder="Email"
                 variant="filled"
                 rounded="full"
+                className="!bg-primary opacity-60"
+                _placeholder={{ textColor: 'black' }}
                 _focus={{ borderColor: 'backgorund' }}
                 {...register('email', { required: true })}
               />
@@ -76,6 +85,8 @@ export function SignIn({ authController, schema }: SignInProps) {
                 type="password"
                 variant="filled"
                 rounded="full"
+                className="!bg-primary opacity-60"
+                _placeholder={{ textColor: 'black' }}
                 _focus={{ borderColor: 'backgorund' }}
                 {...register('password', { required: true })}
               />
@@ -89,8 +100,8 @@ export function SignIn({ authController, schema }: SignInProps) {
               <Button
                 type="submit"
                 isLoading={isSubmitting}
-                bgColor="background"
-                color="primary"
+                bgColor="primary"
+                color="Background"
                 spinnerPlacement="start"
                 fontWeight="bold"
                 rounded="full"
@@ -103,12 +114,12 @@ export function SignIn({ authController, schema }: SignInProps) {
         </form>
       </div>
 
-      <Box className="flex justify-center mt-8 text-backgorund">
+      <Box className="flex justify-center mt-8 text-detail">
         <p>Nova por aqui?</p>
         <Link className="ml-2 underline" to="/sign-up">
           Cadastre-se
         </Link>
       </Box>
-    </Container>
+    </Box>
   );
 }

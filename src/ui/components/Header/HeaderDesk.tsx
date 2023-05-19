@@ -49,10 +49,11 @@ export function HeaderDesk({ location }: HeaderDeskProps) {
           <FiHeart className="text-backgorund w-8 h-8 mr-4" />
         </button>
         <button
+          disabled
           type="button"
           className="bg-backgorund rounded-full text-primary text-xs py-1 px-4"
         >
-          Entrar
+          <Link to="/sign-in">Entrar</Link>
         </button>
       </div>
     </Box>
