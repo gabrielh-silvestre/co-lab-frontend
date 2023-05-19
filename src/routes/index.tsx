@@ -1,4 +1,5 @@
 import { MakeHome } from '@pages/Home';
+import { MakeRegisterEvaluation } from '@pages/RegisterEvaluation';
 import { MakeSearch } from '@pages/Search';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -29,6 +30,10 @@ export const desktopRouter = createBrowserRouter([
   {
     path: '/companies/search',
     element: <MakeSearch />
+  },
+  {
+    path: '/contribute',
+    element: <MakeRegisterEvaluation />
   },
   {
     path: '/sign-in',

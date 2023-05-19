@@ -39,7 +39,7 @@ export function HeaderDesk({ location }: HeaderDeskProps) {
             textColor={location === 'contribute' ? 'background' : 'black'}
             className="ml-3"
           >
-            Contribuir
+            <Link to="/contribute">Contribuir</Link>
           </Box>
         </nav>
       </div>

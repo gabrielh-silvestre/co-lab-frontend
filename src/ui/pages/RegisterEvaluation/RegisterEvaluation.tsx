@@ -37,44 +37,34 @@ export function RegisterEvaluation() {
             </InputGroup>
           </FormLabel>
 
-          <Box className="mt-8">
-            <EvaluationSlider
-              id="participation"
-              label="Como você avalia a participação e presença feminina dentro desta
+          <EvaluationSlider
+            id="participation"
+            label="Como você avalia a participação e presença feminina dentro desta
             empresa?"
-            />
-          </Box>
+          />
 
-          <Box className="mt-8">
-            <EvaluationSlider
-              id="benefits"
-              label="Como você avalia a pratica dos benefícios e políticas oferecidas
+          <EvaluationSlider
+            id="benefits"
+            label="Como você avalia a pratica dos benefícios e políticas oferecidas
             para o publico feminino?"
-            />
-          </Box>
+          />
 
-          <Box className="mt-8">
-            <EvaluationSlider
-              id="growth"
-              label="Como você classifica as oportunidades de desenvolvimento, carreira e
+          <EvaluationSlider
+            id="growth"
+            label="Como você classifica as oportunidades de desenvolvimento, carreira e
             reconhecimento para o publico feminino da empresa."
-            />
-          </Box>
+          />
 
-          <Box className="mt-8">
-            <EvaluationSlider
-              id="safety"
-              label="Você acredita que viveu uma experiência segura, respeitosa e
+          <EvaluationSlider
+            id="safety"
+            label="Você acredita que viveu uma experiência segura, respeitosa e
             igualitária nesta empresa?"
-            />
-          </Box>
+          />
 
-          <Box className="mt-8">
-            <FormLabel htmlFor="comment" className="!text-xl">
-              Compartilhe sua história:
-              <Textarea />
-            </FormLabel>
-          </Box>
+          <FormLabel htmlFor="comment" className="!text-xl">
+            Compartilhe sua história:
+            <Textarea />
+          </FormLabel>
 
           <Box className="my-4 flex justify-center">
             <Button
